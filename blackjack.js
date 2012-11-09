@@ -21,8 +21,8 @@ function Card(suit, rank) {
 }
 
 function deal() {
-  suit = Math.floor(Math.random() * 4 + 1);
-  rank = Math.floor(Math.random() * 13 + 1);
+  var suit = Math.floor(Math.random() * 4 + 1);
+  var rank = Math.floor(Math.random() * 13 + 1);
   return new Card(suit, rank);
 }
 
@@ -53,7 +53,7 @@ function Hand() {
   };
   this.printHand = function() {
     var c = cards.length;
-    showHand = "";
+    var showHand = "";
     for (i = 0; i < c; i++) {
       showHand += cards[i].getNumber()+" of "+cards[i].getSuit()+"\n";
     }
@@ -65,7 +65,7 @@ function Hand() {
 }
 
 function playAsDealer() {
-  dealerHand = new Hand();
+  var dealerHand = new Hand();
   while (dealerHand.score() < 17) {
     dealerHand.hitMe();
   }
@@ -83,8 +83,8 @@ function playAsUser() {
 }
 
 function declareWinner(playerHand, dealerHand) {
-  ps = playerHand.score();
-  ds = dealerHand.score();
+  var ps = playerHand.score();
+  var ds = dealerHand.score();
   if (ps > 21) {
     if (ds > 21) {
       return "You tied!";
@@ -104,11 +104,14 @@ function declareWinner(playerHand, dealerHand) {
 }
 
 function playGame() {
-  player = playAsUser();
-  dealer = playAsDealer();
-  console.log("Player's hand:\n"+player.printHand());
-  console.log("Dealer's hand:\n"+dealer.printHand());
-  console.log(declareWinner(player, dealer));
+  var player = playAsUser();
+  var dealer = playAsDealer();
+  document.getElementById('player').innerHTML = ("Player's hand:\n"+player.printHand());
+  document.getElementById('dealer').innerHTML = ("Dealer's hand:\n"+dealer.printHand());
+  document.getElementById('result').innerHTML = (declareWinner(player, dealer));
+  if (confirm("Play again?")) {
+    playGame();
+  }
 }
 
 playGame();
