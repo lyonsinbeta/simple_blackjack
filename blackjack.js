@@ -54,10 +54,18 @@ function Hand() {
   this.printHand = function() {
     var c = cards.length;
     var showHand = "";
-    for (i = 0; i < c; i++) {
-      showHand += cards[i].getNumber()+" of "+cards[i].getSuit()+"\n";
+    for (var i = 0; i < c; i++) {
+      showHand += cards[i].getNumber()+" of "+cards[i].getSuit();
     }
     return showHand;
+  };
+  this.displayHand = function() {
+    var c = cards.length;
+    var listHand = "";
+    for (var i = 0; i < c; i++) {
+      listHand += "<li>"+cards[i].getNumber()+" of "+cards[i].getSuit()+"</li>";
+    }
+    return listHand;
   };
   this.hitMe = function() {
     cards.push(deal());
@@ -74,10 +82,12 @@ function playAsDealer() {
 
 function playAsUser() {
   var playerHand = new Hand();
-  var hit = confirm(playerHand.printHand());
+  document.getElementById('player').innerHTML = (playerHand.displayHand());
+  var hit = confirm("Hit?");
   while(hit) {
     playerHand.hitMe();
-    hit = confirm(playerHand.printHand());
+    document.getElementById('player').innerHTML = (playerHand.displayHand());
+    hit = confirm("Hit?");
   }
   return playerHand;
 }
@@ -106,12 +116,8 @@ function declareWinner(playerHand, dealerHand) {
 function playGame() {
   var player = playAsUser();
   var dealer = playAsDealer();
-  document.getElementById('player').innerHTML = ("Player's hand:\n"+player.printHand());
-  document.getElementById('dealer').innerHTML = ("Dealer's hand:\n"+dealer.printHand());
+  document.getElementById('player').innerHTML = (player.displayHand());
+  document.getElementById('dealer').innerHTML = (dealer.displayHand());
   document.getElementById('result').innerHTML = (declareWinner(player, dealer));
-  if (confirm("Play again?")) {
-    playGame();
-  }
-}
+ }
 
-playGame();
