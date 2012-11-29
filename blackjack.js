@@ -114,6 +114,8 @@ function declareWinner(playerHand, dealerHand) {
 }
 
 function playGame() {
+  document.getElementById('player').innerHTML = "";
+  document.getElementById('dealer').innerHTML = "";
   var player = playAsUser();
   var dealer = playAsDealer();
   document.getElementById('player').innerHTML = (player.displayHand());
