@@ -2,13 +2,14 @@ var deck = generateDeck();
 
 function generateDeck() {
   var deck = [];
-  var suits = [1, 2, 3, 4];
+  var suits = ["Spades", "Hearts", "Clubs", "Diamonds"];
   var ranks = ["A", 2, 3 , 4, 5, 6, 7, 8, 9, 10, "J", "Q", "K"];
   for (var s = 0; s < suits.length; s++) {
     for (var r = 0; r < ranks.length; r++) {
       deck.push(new Card(suits[s], ranks[r]));
     }
   }
+  deck.sort(function() { return Math.random() > 0.5 } );
   return deck;
 }
 
