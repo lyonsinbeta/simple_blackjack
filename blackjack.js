@@ -1,3 +1,17 @@
+var deck = generateDeck();
+
+function generateDeck() {
+  var deck = [];
+  var suits = [1, 2, 3, 4];
+  var ranks = ["A", 2, 3 , 4, 5, 6, 7, 8, 9, 10, "J", "Q", "K"];
+  for (var s = 0; s < suits.length; s++) {
+    for (var r = 0; r < ranks.length; r++) {
+      deck.push(new Card(suits[s], ranks[r]));
+    }
+  }
+  return deck;
+}
+
 function Card(suit, rank) {
   var suit = suit;
   var rank = rank;
@@ -8,10 +22,10 @@ function Card(suit, rank) {
     return rank;
   };
   this.getValue = function() {
-    if (rank === 11 || rank === 12 || rank === 13) {
+    if (rank === "J" || rank === "Q" || rank === "K") {
       return 10;
     }
-    if (rank === 1) {
+    if (rank === "A") {
       return 11;
     }
     else {
@@ -21,9 +35,7 @@ function Card(suit, rank) {
 }
 
 function deal() {
-  var suit = Math.floor(Math.random() * 4 + 1);
-  var rank = Math.floor(Math.random() * 13 + 1);
-  return new Card(suit, rank);
+  return deck.pop();
 }
 
 function Hand() {
